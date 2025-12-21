@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils"
 interface ThermoGaugeProps {
   className?: string
 }
+const maxThermoJauge = 24 as number;
 
 export function ThermoGauge({ className }: ThermoGaugeProps) {
   const [scrollProgress, setScrollProgress] = useState(0)
@@ -23,15 +24,15 @@ export function ThermoGauge({ className }: ThermoGaugeProps) {
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
-
-  const temperature = Math.round(35 - scrollProgress * 57) // +35°C to -22°C
-  const fillHeight = mounted ? 15 + scrollProgress * 75 : 15 // 15% to 90%
+  console.log(scrollProgress)
+  const temperature = Math.round(maxThermoJauge - scrollProgress * 10 * 64) // Reduction of temperature on scroll
+  const fillHeight = mounted ? (68 - (scrollProgress * 10 * 160) ) : 15 // 15% to 90%
 
   const getLabel = () => {
     if (temperature > 25) return "Chauffage"
     if (temperature > 15) return "Confort"
-    if (temperature > 5) return "Climatisation"
-    if (temperature > -5) return "Froid positif"
+    if (temperature >= 5) return "Climatisation"
+    if (temperature > -0) return "Froid négatif"
     return "Froid négatif"
   }
 
@@ -70,7 +71,7 @@ export function ThermoGauge({ className }: ThermoGaugeProps) {
         />
         {/* Gauge marks - updated for full range */}
         <div className="absolute inset-0 flex flex-col justify-between py-3 px-1">
-          {[35, 20, 5, -10, -22].map((temp, i) => (
+          {[35, 25, 15, 5, 0].map((temp, i) => (
             <div key={i} className="flex items-center justify-end">
               <span
                 className={cn(
