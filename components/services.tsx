@@ -1,5 +1,5 @@
 import { services } from "@/lib/data"
-import { Wind, Snowflake, Settings, Wrench, Flame } from "lucide-react"
+import { Wind, Snowflake, Settings, Wrench, Flame, Brush } from "lucide-react"
 
 const iconMap = {
   wind: Wind,
@@ -7,6 +7,7 @@ const iconMap = {
   settings: Settings,
   wrench: Wrench,
   flame: Flame,
+  clean: Brush
 }
 
 export function Services() {

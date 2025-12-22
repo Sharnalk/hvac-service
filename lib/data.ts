@@ -5,40 +5,31 @@ export const services = [
     description:
       "Installation, entretien et réparation de systèmes de climatisation pour un confort optimal en toute saison.",
     icon: "wind",
-    useCases: ["Maison", "Bureau", "Commerce", "Restaurant"],
+    useCases: ["Maison", "Bureau", "Commerce", "Collectivités"],
     type: "both" as const, // Added type for cold/heat/both
   },
   {
-    id: "pompe-a-chaleur",
-    title: "Pompe à Chaleur", // Added PAC service for heating
+    id: "entretien",
+    title: "Entretien", 
     description:
-      "Installation et maintenance de pompes à chaleur air-air et air-eau pour un chauffage économique et écologique.",
-    icon: "flame",
-    useCases: ["Résidentiel", "Tertiaire", "Rénovation", "Neuf"],
-    type: "heat" as const,
-  },
-  {
-    id: "chambres-froides",
-    title: "Chambres Froides",
-    description:
-      "Conception et installation de chambres froides positives et négatives, adaptées à vos besoins de conservation.",
-    icon: "snowflake",
-    useCases: ["Restauration", "Grande distribution", "Laboratoire", "Industrie"],
-    type: "cold" as const,
+    "Nettoyage, contrôle et maintenance des équipements pour garantir une hygiène irréprochable, des performances optimales et une durée de vie prolongée.",
+    icon: "clean",
+    useCases: ["Maison", "Bureau", "Commerce", "Collectivités"],
+    type: "both" as const,
   },
   {
     id: "maintenance",
     title: "Maintenance Préventive",
     description: "Contrats de maintenance sur mesure pour garantir la longévité et l'efficacité de vos équipements.",
     icon: "settings",
-    useCases: ["Professionnels", "Collectivités", "Industriels"],
+    useCases: ["Maison", "Bureau", "Commerce", "Collectivités"],
     type: "both" as const,
   },
   {
     id: "depannage",
     title: "Dépannage",
     description:
-      "Intervention rapide en cas de panne. Une équipe disponible pour rétablir le fonctionnement de vos installations.",
+    "Intervention rapide en cas de panne sur les installations que nous avons réalisées, pour assurer leur bon fonctionnement.",
     icon: "wrench",
     useCases: ["Urgence", "Diagnostic", "Réparation"],
     type: "both" as const,
