@@ -180,33 +180,6 @@ export const realisations: Realisation[] = [
   },
 ]
 
-export const testimonials = [
-  {
-    id: 1,
-    name: "Marie L.",
-    role: "Gérante de restaurant",
-    content:
-      "Intervention rapide et professionnelle pour notre chambre froide. L'équipe a su diagnostiquer le problème en moins d'une heure.",
-    rating: 5,
-  },
-  {
-    id: 2,
-    name: "Pierre D.",
-    role: "Directeur technique",
-    content:
-      "Nous travaillons avec eux depuis 3 ans pour la maintenance de nos installations. Fiabilité et réactivité au rendez-vous.",
-    rating: 5,
-  },
-  {
-    id: 3,
-    name: "Sophie M.",
-    role: "Particulier",
-    content:
-      "Installation de notre climatisation réalisée avec soin. Conseils pertinents et travail propre. Je recommande.",
-    rating: 5,
-  },
-]
-
 export const faqItems = [
   {
     question: "Quels types d'équipements prenez-vous en charge ?",

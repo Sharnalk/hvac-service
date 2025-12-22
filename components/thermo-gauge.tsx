@@ -24,7 +24,6 @@ export function ThermoGauge({ className }: ThermoGaugeProps) {
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
-  console.log(scrollProgress)
   const temperature = Math.round(maxThermoJauge - scrollProgress * 10 * 64) // Reduction of temperature on scroll
   const fillHeight = mounted ? (68 - (scrollProgress * 10 * 160) ) : 15 // 15% to 90%
 
