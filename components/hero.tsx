@@ -28,8 +28,8 @@ export function Hero() {
             </h1>
 
             <p className="mt-6 text-lg lg:text-xl text-slate-400 max-w-2xl leading-relaxed text-pretty">
-              Climatisation, chauffage, froid commercial et industriel. De la pompe à chaleur à la chambre froide, nous
-              maîtrisons toutes les températures avec la précision qui fait la différence.
+            Climatisation et chauffage par systèmes réversibles.<br/>
+            De la mise en service à l’entretien et au dépannage, nous maîtrisons votre confort thermique avec la précision qui fait la différence.
             </p>
 
             <div className="mt-10 grid grid-cols-3 gap-4 max-w-lg">
