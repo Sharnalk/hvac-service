@@ -76,7 +76,7 @@ export function Services() {
         {/* 24/7 note */}
         <div className="mt-12 flex justify-center">
           <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-slate-900 border border-slate-800">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span className="text-sm text-slate-300">
               Service de dépannage disponible <span className="text-cyan-400">7j/7</span> pour les situations urgentes
             </span>

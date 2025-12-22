@@ -41,25 +41,25 @@ export const processSteps = [
     step: 1,
     title: "Diagnostic",
     description: "Analyse complète de vos besoins et de l'existant",
-    temp: -5,
+    temp: 24,
   },
   {
     step: 2,
     title: "Proposition",
     description: "Devis détaillé et solutions adaptées",
-    temp: -10,
+    temp: 16,
   },
   {
     step: 3,
     title: "Intervention",
     description: "Installation ou réparation par nos techniciens qualifiés",
-    temp: -15,
+    temp: 7,
   },
   {
     step: 4,
     title: "Suivi",
     description: "Accompagnement et maintenance préventive",
-    temp: -18,
+    temp: -2,
   },
 ]
 

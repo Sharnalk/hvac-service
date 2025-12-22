@@ -11,15 +11,15 @@ export function Process() {
     const handleScroll = () => {
       if (!sectionRef.current) return
       const rect = sectionRef.current.getBoundingClientRect()
-      const sectionTop = rect.top
+      const sectionTop = rect.top - 400
       const sectionHeight = rect.height
-      const windowHeight = window.innerHeight
+      const windowHeight = window.innerHeight - 800
 
       // Calculate progress through section
       const scrollProgress = Math.max(0, Math.min(1, (windowHeight - sectionTop) / (windowHeight + sectionHeight)))
       setProgress(scrollProgress)
     }
-
+    
     window.addEventListener("scroll", handleScroll, { passive: true })
     handleScroll()
     return () => window.removeEventListener("scroll", handleScroll)
@@ -42,7 +42,7 @@ export function Process() {
           {/* Progress line */}
           <div className="absolute left-1/2 top-0 bottom-0 w-px bg-slate-800 -translate-x-1/2 hidden lg:block">
             <div
-              className="w-full bg-gradient-to-b from-cyan-400 to-blue-500 transition-all duration-300 ease-out"
+              className="w-full bg-gradient-to-b from-emerald-400 to-blue-500 transition-all duration-300 ease-out"
               style={{ height: `${progress * 100}%` }}
             />
           </div>
