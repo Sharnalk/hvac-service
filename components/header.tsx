@@ -35,10 +35,7 @@ export function Header() {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
-              <span className="text-white font-bold text-lg">F</span>
-            </div>
-            <span className="font-semibold text-slate-100 text-lg tracking-tight hidden sm:block">FroidPro</span>
+            <span className="font-semibold text-slate-100 text-lg tracking-tight hidden sm:block">HVAC SERVICES</span>
           </a>
 
           {/* Desktop Navigation */}
