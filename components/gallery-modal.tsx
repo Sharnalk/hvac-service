@@ -117,7 +117,7 @@ export function GalleryModal({ isOpen, onClose, project }: GalleryModalProps) {
         {/* Main image area */}
         <div className="w-full lg:w-2/3 flex flex-col gap-4">
           <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-slate-900">
-            <Image src={currentImage.src || "/placeholder.svg"} alt={currentImage.alt} fill className="object-cover" />
+            <Image src={currentImage.src || ""} alt={currentImage.alt} fill className="object-cover" />
           </div>
 
           {/* Thumbnails - only show if multiple images */}
@@ -136,7 +136,7 @@ export function GalleryModal({ isOpen, onClose, project }: GalleryModalProps) {
                   aria-label={`Voir image ${idx + 1}`}
                   aria-current={idx === currentImageIndex ? "true" : undefined}
                 >
-                  <Image src={img.src || "/placeholder.svg"} alt={img.alt} fill className="object-cover" />
+                  <Image src={img.src || ""} alt={img.alt} fill className="object-cover" />
                 </button>
               ))}
             </div>

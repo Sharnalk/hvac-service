@@ -79,6 +79,7 @@ export function Gallery() {
                   alt={`${project.title} - ${project.lieu}`}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
                 />
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
