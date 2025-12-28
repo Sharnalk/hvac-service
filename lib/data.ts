@@ -84,9 +84,10 @@ export const realisations: Realisation[] = [
     id: 1,
     title: "Restaurant Le Gourmet",
     images: [
-      { src: "/placeholder.svg?height=600&width=800", alt: "Chambre froide restaurant" },
-      { src: "/placeholder.svg?height=600&width=800", alt: "Intérieur chambre froide" },
-      { src: "/placeholder.svg?height=600&width=800", alt: "Groupe froid" },
+      { src: "/realisations/clim1/clim_1_a.webp", alt: "" },
+      { src: "/realisations/clim1/clim_1_b.webp", alt: "" },
+      { src: "/realisations/clim1/clim_1_c.webp", alt: "" },
+      { src: "/realisations/clim1/clim_1_d.webp", alt: "" },
     ],
     category: "Chambre froide",
     type: "cold",
@@ -94,14 +95,16 @@ export const realisations: Realisation[] = [
     objectif: "Conservation optimale des produits frais",
     solution: "Chambre froide positive 12m³",
   },
+
   {
     id: 2,
     title: "Bureaux Nexia",
     images: [
-      { src: "/placeholder.svg?height=600&width=800", alt: "Climatisation bureaux" },
-      { src: "/placeholder.svg?height=600&width=800", alt: "Open space climatisé" },
-      { src: "/placeholder.svg?height=600&width=800", alt: "Unités extérieures" },
-      { src: "/placeholder.svg?height=600&width=800", alt: "Panneau de contrôle" },
+      { src: "/realisations/clim2/clim_2_a.webp", alt: "" },
+      { src: "/realisations/clim2/clim_2_b.webp", alt: "" },
+      { src: "/realisations/clim2/clim_2_c.webp", alt: "" },
+      { src: "/realisations/clim2/clim_2_d.webp", alt: "" },
+      { src: "/realisations/clim2/clim_2_e.webp", alt: "" },
     ],
     category: "Climatisation",
     type: "both",
@@ -109,12 +112,14 @@ export const realisations: Realisation[] = [
     objectif: "Confort thermique 200m²",
     solution: "Système VRV multi-zones",
   },
+
   {
     id: 3,
     title: "Entrepôt Frigolog",
     images: [
-      { src: "/placeholder.svg?height=600&width=800", alt: "Entrepôt frigorifique" },
-      { src: "/placeholder.svg?height=600&width=800", alt: "Zone surgélation" },
+      { src: "/realisations/clim3/clim_3_a.webp", alt: "" },
+      { src: "/realisations/clim3/clim_3_b.webp", alt: "" },
+      { src: "/realisations/clim3/clim_3_c.webp", alt: "" },
     ],
     category: "Chambre froide",
     type: "cold",
@@ -122,13 +127,16 @@ export const realisations: Realisation[] = [
     objectif: "Stockage produits surgelés",
     solution: "Chambre négative -22°C",
   },
+
   {
     id: 4,
     title: "Supermarché FreshMart",
     images: [
-      { src: "/placeholder.svg?height=600&width=800", alt: "Vitrines réfrigérées" },
-      { src: "/placeholder.svg?height=600&width=800", alt: "Intervention technicien" },
-      { src: "/placeholder.svg?height=600&width=800", alt: "Local technique" },
+      { src: "/realisations/clim4/clim_4_a.webp", alt: "" },
+      { src: "/realisations/clim4/clim_4_b.webp", alt: "" },
+      { src: "/realisations/clim4/clim_4_c.webp", alt: "" },
+      { src: "/realisations/clim4/clim_4_d.webp", alt: "" },
+      { src: "/realisations/clim4/clim_4_e.webp", alt: "" },
     ],
     category: "Maintenance",
     type: "cold",
@@ -136,14 +144,14 @@ export const realisations: Realisation[] = [
     objectif: "Contrat annuel préventif",
     solution: "Maintenance trimestrielle complète",
   },
+
   {
     id: 5,
     title: "Villa Les Oliviers",
     images: [
-      { src: "/placeholder.svg?height=600&width=800", alt: "PAC extérieure" },
-      { src: "/placeholder.svg?height=600&width=800", alt: "Unité intérieure salon" },
-      { src: "/placeholder.svg?height=600&width=800", alt: "Chambre climatisée" },
-      { src: "/placeholder.svg?height=600&width=800", alt: "Thermostat connecté" },
+      { src: "/realisations/clim5/clim_5_a.webp", alt: "" },
+      { src: "/realisations/clim5/clim_5_b.webp", alt: "" },
+      { src: "/realisations/clim5/clim_5_c.webp", alt: "" },
     ],
     category: "Pompe à chaleur",
     type: "heat",
@@ -152,25 +160,11 @@ export const realisations: Realisation[] = [
     solution: "PAC air-air multi-split 4 unités",
   },
   {
-    id: 6,
-    title: "Cuisine Centrale Sodexo",
-    images: [
-      { src: "/placeholder.svg?height=600&width=800", alt: "Cuisine professionnelle" },
-      { src: "/placeholder.svg?height=600&width=800", alt: "Réparation compresseur" },
-    ],
-    category: "Dépannage",
-    type: "cold",
-    lieu: "Cuisine collective",
-    objectif: "Panne compresseur urgente",
-    solution: "Remplacement sous 4h",
-  },
-  {
     id: 7,
     title: "Hôtel Le Méridien",
     images: [
-      { src: "/placeholder.svg?height=600&width=800", alt: "Chambre d'hôtel" },
-      { src: "/placeholder.svg?height=600&width=800", alt: "Unités en toiture" },
-      { src: "/placeholder.svg?height=600&width=800", alt: "Hall d'entrée" },
+      { src: "/realisations/clim7/clim_7_a.webp", alt: "" },
+      { src: "/realisations/clim7/clim_7_b.webp", alt: "" },
     ],
     category: "Climatisation",
     type: "both",
@@ -178,7 +172,8 @@ export const realisations: Realisation[] = [
     objectif: "Rénovation système CVC complet",
     solution: "VRV 45 unités + GTC",
   },
-]
+];
+
 
 export const faqItems = [
   {
