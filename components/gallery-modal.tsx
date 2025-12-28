@@ -1,74 +1,78 @@
-"use client"
+"use client";
 
-import { useEffect, useCallback, useState } from "react"
-import Image from "next/image"
-import { X, ChevronLeft, ChevronRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import type { Realisation } from "@/lib/data"
-import { cn } from "@/lib/utils"
+import { useEffect, useCallback, useState } from "react";
+import Image from "next/image";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import type { Realisation } from "@/lib/data";
+import { cn } from "@/lib/utils";
 
 interface GalleryModalProps {
-  isOpen: boolean
-  onClose: () => void
-  project: Realisation | null
+  isOpen: boolean;
+  onClose: () => void;
+  project: Realisation | null;
 }
 
 export function GalleryModal({ isOpen, onClose, project }: GalleryModalProps) {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Reset image index when project changes
   useEffect(() => {
-    setCurrentImageIndex(0)
-  }, [project?.id])
-
+    if (!project) return;
+    setCurrentImageIndex(0);
+  }, [project?.id]);
   const handlePrevImage = useCallback(() => {
-    if (!project) return
-    setCurrentImageIndex((prev) => (prev === 0 ? project.images.length - 1 : prev - 1))
-  }, [project])
+    if (!project) return;
+    setCurrentImageIndex((prev) =>
+      prev === 0 ? project.images.length - 1 : prev - 1
+    );
+  }, [project]);
 
   const handleNextImage = useCallback(() => {
-    if (!project) return
-    setCurrentImageIndex((prev) => (prev === project.images.length - 1 ? 0 : prev + 1))
-  }, [project])
+    if (!project) return;
+    setCurrentImageIndex((prev) =>
+      prev === project.images.length - 1 ? 0 : prev + 1
+    );
+  }, [project]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (!isOpen) return
-      if (e.key === "Escape") onClose()
-      if (e.key === "ArrowLeft") handlePrevImage()
-      if (e.key === "ArrowRight") handleNextImage()
-    }
+      if (!isOpen) return;
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") handlePrevImage();
+      if (e.key === "ArrowRight") handleNextImage();
+    };
 
-    window.addEventListener("keydown", handleKeyDown)
-    return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [isOpen, onClose, handlePrevImage, handleNextImage])
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose, handlePrevImage, handleNextImage]);
 
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = "hidden"
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = ""
+      document.body.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = ""
-    }
-  }, [isOpen])
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
-  if (!isOpen || !project) return null
+  if (!isOpen || !project) return null;
 
-  const currentImage = project.images[currentImageIndex]
-  const hasMultipleImages = project.images.length > 1
+  const currentImage = project.images[currentImageIndex];
+  const hasMultipleImages = project.images.length > 1;
 
   const getTypeColor = () => {
     switch (project.type) {
       case "cold":
-        return "bg-sky-500/20 text-sky-400 border-sky-500/30"
+        return "bg-sky-500/20 text-sky-400 border-sky-500/30";
       case "heat":
-        return "bg-amber-500/20 text-amber-400 border-amber-500/30"
+        return "bg-amber-500/20 text-amber-400 border-amber-500/30";
       default:
-        return "bg-slate-500/20 text-slate-300 border-slate-500/30"
+        return "bg-slate-500/20 text-slate-300 border-slate-500/30";
     }
-  }
+  };
 
   return (
     <div
@@ -81,7 +85,7 @@ export function GalleryModal({ isOpen, onClose, project }: GalleryModalProps) {
       <Button
         variant="ghost"
         size="icon"
-        className="absolute top-4 right-4 text-white/70 hover:text-white hover:bg-white/10 z-10"
+        className="absolute top-8 right-8 text-white/70 hover:text-white hover:bg-white/10 z-10"
         onClick={onClose}
         aria-label="Fermer"
       >
@@ -117,7 +121,19 @@ export function GalleryModal({ isOpen, onClose, project }: GalleryModalProps) {
         {/* Main image area */}
         <div className="w-full lg:w-2/3 flex flex-col gap-4">
           <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-slate-900">
-            <Image src={currentImage.src || ""} alt={currentImage.alt} fill className="object-cover" />
+            {currentImage ? (
+              <Image
+                src={currentImage.src}
+                alt={currentImage.alt ?? ""}
+                fill
+                sizes="(max-width: 640px) 100vw,
+                (max-width: 1024px) 50vw,
+                                    33vw"
+                className="object-cover"
+              />
+            ) : (
+              <div className="absolute inset-0 animate-pulse bg-slate-800" />
+            )}
           </div>
 
           {/* Thumbnails - only show if multiple images */}
@@ -131,12 +147,20 @@ export function GalleryModal({ isOpen, onClose, project }: GalleryModalProps) {
                     "relative flex-shrink-0 w-20 h-16 rounded-md overflow-hidden border-2 transition-all",
                     idx === currentImageIndex
                       ? "border-sky-400 opacity-100"
-                      : "border-transparent opacity-60 hover:opacity-100",
+                      : "border-transparent opacity-60 hover:opacity-100"
                   )}
                   aria-label={`Voir image ${idx + 1}`}
                   aria-current={idx === currentImageIndex ? "true" : undefined}
                 >
-                  <Image src={img.src || ""} alt={img.alt} fill className="object-cover" />
+                  <Image
+                    src={img.src || ""}
+                    alt={img.alt}
+                    fill
+                    sizes="(max-width: 640px) 100vw,
+                    (max-width: 1024px) 50vw,
+                                        33vw"
+                    className="object-cover"
+                  />
                 </button>
               ))}
             </div>
@@ -146,12 +170,23 @@ export function GalleryModal({ isOpen, onClose, project }: GalleryModalProps) {
         {/* Project info */}
         <div className="lg:w-1/3 text-white p-4 lg:sticky lg:top-0">
           <div className="flex items-center gap-2 mb-4">
-            <span className={cn("inline-block px-3 py-1 text-xs font-medium rounded-full border", getTypeColor())}>
+            <span
+              className={cn(
+                "inline-block px-3 py-1 text-xs font-medium rounded-full border",
+                getTypeColor()
+              )}
+            >
               {project.category}
             </span>
-            {project.type === "cold" && <span className="text-xs text-sky-400">Froid</span>}
-            {project.type === "heat" && <span className="text-xs text-amber-400">Chaud</span>}
-            {project.type === "both" && <span className="text-xs text-slate-400">Réversible</span>}
+            {project.type === "cold" && (
+              <span className="text-xs text-sky-400">Froid</span>
+            )}
+            {project.type === "heat" && (
+              <span className="text-xs text-amber-400">Chaud</span>
+            )}
+            {project.type === "both" && (
+              <span className="text-xs text-slate-400">Réversible</span>
+            )}
           </div>
 
           <h3 className="text-2xl font-semibold mb-2">{project.title}</h3>
@@ -159,11 +194,15 @@ export function GalleryModal({ isOpen, onClose, project }: GalleryModalProps) {
 
           <div className="space-y-4 text-sm">
             <div className="p-3 rounded-lg bg-slate-800/50 border border-slate-700/50">
-              <span className="text-slate-500 block text-xs uppercase tracking-wider mb-1">Objectif</span>
+              <span className="text-slate-500 block text-xs uppercase tracking-wider mb-1">
+                Objectif
+              </span>
               <p className="text-slate-200">{project.objectif}</p>
             </div>
             <div className="p-3 rounded-lg bg-slate-800/50 border border-slate-700/50">
-              <span className="text-slate-500 block text-xs uppercase tracking-wider mb-1">Solution</span>
+              <span className="text-slate-500 block text-xs uppercase tracking-wider mb-1">
+                Solution
+              </span>
               <p className="text-slate-200">{project.solution}</p>
             </div>
           </div>
@@ -176,5 +215,5 @@ export function GalleryModal({ isOpen, onClose, project }: GalleryModalProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }
