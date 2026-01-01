@@ -6,14 +6,11 @@ export function Footer() {
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">F</span>
-              </div>
-              <span className="font-semibold text-slate-100 text-lg">FroidPro</span>
+
+              <span className="font-semibold text-slate-100 text-lg">HVAC SERVICES</span>
             </div>
             <p className="text-slate-400 text-sm max-w-sm leading-relaxed">
-              Solutions frigorifiques et climatisation pour particuliers et professionnels. Précision, fiabilité,
-              réactivité.
+              Climatisation pour particuliers et professionnels. Précision, fiabilité, réactivité.
             </p>
           </div>
 
@@ -48,7 +45,8 @@ export function Footer() {
           <div>
             <h4 className="text-white font-medium text-sm mb-4">Contact</h4>
             <ul className="space-y-2 text-sm text-slate-400">
-              <li>01 23 45 67 89</li>
+              <li>931601371 00012</li>
+              <li>06 98 29 98 63</li>
               <li>contact@froidpro.fr</li>
               <li className="text-cyan-400">Urgence 24/7</li>
             </ul>

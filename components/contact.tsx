@@ -1,15 +1,19 @@
 "use client";
 
 import type React from "react";
-
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Phone, Mail, MapPin } from "lucide-react";
-import MapFrance from "./map/map-france";
+
+const MapFrance = dynamic(() => import("@/components/map/map-france"), {
+  ssr: false,
+  loading: () => <div>Carte en cours de chargement...</div>,
+});
+
 
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -77,7 +81,7 @@ export function Contact() {
                   <p className="text-slate-400 text-xs uppercase tracking-wider mb-1">
                     Zone d&apos;intervention
                   </p>
-                  <p className="text-white font-medium">Rayon de 80 km</p>
+                  <p className="text-white font-medium">Sud et France entière</p>
                 </div>
               </div>
             </div>
@@ -95,7 +99,7 @@ export function Contact() {
           </div>
 
           {/* Contact form */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-3 ">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -149,21 +153,6 @@ export function Contact() {
                   placeholder="Décrivez votre besoin..."
                   className="bg-slate-900 border-slate-800 text-white placeholder:text-slate-500 focus:border-cyan-500 resize-none"
                 />
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Checkbox
-                  id="consent"
-                  required
-                  className="mt-0.5 border-slate-700 data-[state=checked]:bg-cyan-500"
-                />
-                <Label
-                  htmlFor="consent"
-                  className="text-slate-400 text-sm leading-relaxed"
-                >
-                  J&apos;accepte que mes données soient utilisées pour me
-                  recontacter dans le cadre de ma demande.
-                </Label>
               </div>
 
               <div className="flex flex-wrap gap-4">
