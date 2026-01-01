@@ -1,8 +1,23 @@
-import { Button } from "@/components/ui/button"
-import { ThermoGauge } from "@/components/thermo-gauge"
-import { IsothermBackground } from "@/components/isotherm-background"
+"use client";
+import { Button } from "@/components/ui/button";
+import { ThermoGauge } from "@/components/thermo-gauge";
+import { IsothermBackground } from "@/components/isotherm-background";
+import { useState, useEffect } from "react";
 
 export function Hero() {
+  const [isWide, setIsWide] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsWide(window.innerWidth > 1023);
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 overflow-hidden">
       <IsothermBackground />
@@ -17,7 +32,9 @@ export function Hero() {
           <div className="lg:col-span-7 xl:col-span-8">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700/50 mb-8">
               <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
-              <span className="text-sm text-slate-300">Particuliers & Professionnels</span>
+              <span className="text-sm text-slate-300">
+                Particuliers & Professionnels
+              </span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight tracking-tight text-balance">
@@ -28,27 +45,40 @@ export function Hero() {
             </h1>
 
             <p className="mt-6 text-lg lg:text-xl text-slate-400 max-w-2xl leading-relaxed text-pretty">
-            Climatisation et chauffage par systèmes réversibles.<br/>
-            De la mise en service à l’entretien et au dépannage, nous maîtrisons votre confort thermique avec la précision qui fait la différence.
+              Climatisation et chauffage par systèmes réversibles.
+              <br />
+              De la mise en service à l’entretien et au dépannage, nous
+              maîtrisons votre confort thermique avec la précision qui fait la
+              différence.
             </p>
 
             <div className="mt-10 grid grid-cols-3 gap-4 max-w-lg">
               <div className="p-4 rounded-lg bg-slate-800/30 border border-sky-500/20">
-                <div className="text-2xl font-bold text-sky-400 font-mono">-22°C</div>
+                <div className="text-2xl font-bold text-sky-400 font-mono">
+                  -22°C
+                </div>
                 <div className="text-xs text-slate-500 mt-1">Froid négatif</div>
               </div>
               <div className="p-4 rounded-lg bg-slate-800/30 border border-amber-500/20">
-                <div className="text-2xl font-bold text-amber-400 font-mono">+35°C</div>
+                <div className="text-2xl font-bold text-amber-400 font-mono">
+                  +35°C
+                </div>
                 <div className="text-xs text-slate-500 mt-1">Chauffage PAC</div>
               </div>
               <div className="p-4 rounded-lg bg-slate-800/30 border border-slate-700/50">
-                <div className="text-2xl font-bold text-white font-mono">&lt;4h</div>
+                <div className="text-2xl font-bold text-white font-mono">
+                  &lt;4h
+                </div>
                 <div className="text-xs text-slate-500 mt-1">Intervention</div>
               </div>
             </div>
 
             <div className="mt-10 flex flex-wrap gap-4">
-              <Button size="lg" className="bg-white text-slate-900 hover:bg-slate-100 font-medium px-8" asChild>
+              <Button
+                size="lg"
+                className="bg-white text-slate-900 hover:bg-slate-100 font-medium px-8"
+                asChild
+              >
                 <a href="#contact">Demander un devis</a>
               </Button>
               <Button
@@ -63,20 +93,24 @@ export function Hero() {
           </div>
 
           {/* Thermo Gauge */}
-          <div className="lg:col-span-5 xl:col-span-4 flex justify-center lg:justify-end">
-            <div className="relative">
-              <div className="absolute inset-0 bg-sky-500/20 blur-3xl rounded-full" />
-              <div className="relative bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8">
-                <ThermoGauge />
-                <p className="text-center text-xs text-slate-500 mt-4">Jauge interactive au scroll</p>
+          {isWide && (
+            <div className="lg:col-span-5 xl:col-span-4 flex justify-center lg:justify-end">
+              <div className="relative">
+                <div className="absolute inset-0 bg-sky-500/20 blur-3xl rounded-full" />
+                <div className="relative bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8">
+                  <ThermoGauge />
+                  <p className="text-center text-xs text-slate-500 mt-4">
+                    Jauge interactive au scroll
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
 
       {/* Bottom fade */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-950 to-transparent" />
     </section>
-  )
+  );
 }
