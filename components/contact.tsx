@@ -8,25 +8,91 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Phone, Mail, MapPin } from "lucide-react";
+import { sendEmail } from "@/actions/mail-service";
+import { toast } from "sonner"
 
 const MapFrance = dynamic(() => import("@/components/map/map-france"), {
   ssr: false,
   loading: () => <div>Carte en cours de chargement...</div>,
 });
 
+type ContactFormData = {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  type: "devis" | "maintenance" | "depannage" | "autre";
+  message: string;
+};
 
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const data: ContactFormData = {
+      name: formData.get("name")?.toString().trim() ?? "",
+      email: formData.get("email")?.toString().trim() ?? "",
+      phoneNumber: formData.get("phoneNumber")?.toString().trim() ?? "",
+      type: formData.get("type") as ContactFormData["type"],
+      message: formData.get("message")?.toString().trim() ?? "",
+    };
+
+    // validations custom
+    if (!data.name) {
+      setIsSubmitting(false);
+      alert("Veuillez renseigner votre nom complet.");
+      return;
+    }
+
+    if (!data.email) {
+      setIsSubmitting(false);
+      alert("Merci d’indiquer votre email.");
+      return;
+    }
+
+    if (!data.phoneNumber) {
+      setIsSubmitting(false);
+      alert("Merci d’indiquer votre numéro de téléphone.");
+      return;
+    }
+
+    if (!data.type) {
+      setIsSubmitting(false);
+      alert("Veuillez sélectionner un type de demande.");
+      return;
+    }
+
+    if (data.message.length < 10) {
+      setIsSubmitting(false);
+      alert("Le message doit contenir au moins 10 caractères.");
+      return;
+    }
+
+    // construction du mail
+    const subject = `Nouvelle demande – ${data.type}`;
+    const body = `
+      <h2>Nouvelle demande</h2>
+      <p><strong>Nom :</strong> ${data.name}</p>
+      <p><strong>Email :</strong> ${data.email}</p>
+      <p><strong>Numéro de téléphone :</strong> ${data.phoneNumber}</p>
+      <p><strong>Type :</strong> ${data.type}</p>
+      <p><strong>Message :</strong></p>
+      <p>${data.message}</p>
+    `;
+
+    const response = await sendEmail(data.email, subject, body);
+    console.log(response.message)
     setIsSubmitting(false);
-    alert(
-      "Votre demande a bien été envoyée. Nous vous recontacterons rapidement."
-    );
+
+    if (response.success) {
+      form.reset();
+    } else {
+    }
   };
 
   return (
@@ -69,7 +135,9 @@ export function Contact() {
                   <p className="text-slate-400 text-xs uppercase tracking-wider mb-1">
                     Email
                   </p>
-                  <p className="text-white font-medium">contact@froidpro.fr</p>
+                  <p className="text-white font-medium">
+                    hvacservices.clim@gmail.com
+                  </p>
                 </div>
               </div>
 
@@ -81,7 +149,9 @@ export function Contact() {
                   <p className="text-slate-400 text-xs uppercase tracking-wider mb-1">
                     Zone d&apos;intervention
                   </p>
-                  <p className="text-white font-medium">Sud et France entière</p>
+                  <p className="text-white font-medium">
+                    Sud et France entière
+                  </p>
                 </div>
               </div>
             </div>
@@ -108,30 +178,46 @@ export function Contact() {
                   </Label>
                   <Input
                     id="name"
+                    name="name"
                     required
                     placeholder="Votre nom"
                     className="bg-slate-900 border-slate-800 text-white placeholder:text-slate-500 focus:border-cyan-500"
                   />
                 </div>
+
                 <div className="space-y-2">
-                  <Label htmlFor="contact" className="text-slate-300 text-sm">
-                    Téléphone ou email
+                  <Label htmlFor="phoneNumber" className="text-slate-300 text-sm">
+                    Téléphone
                   </Label>
                   <Input
-                    id="contact"
-                    required
+                    id="phoneNumber"
+                    name="phoneNumber"
                     placeholder="Comment vous joindre"
                     className="bg-slate-900 border-slate-800 text-white placeholder:text-slate-500 focus:border-cyan-500"
                   />
                 </div>
               </div>
-
+              <div className="space-y-2">
+                  <Label htmlFor="email" className="text-slate-300 text-sm">
+                    Email*
+                  </Label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="Veuillez insérer votre email"
+                    className="bg-slate-900 border-slate-800 text-white placeholder:text-slate-500 focus:border-cyan-500"
+                  />
+                </div>
               <div className="space-y-2">
                 <Label htmlFor="type" className="text-slate-300 text-sm">
                   Type de demande
                 </Label>
                 <select
                   id="type"
+                  name="type"
+                  required
                   className="w-full h-10 px-3 rounded-md bg-slate-900 border border-slate-800 text-white text-sm focus:border-cyan-500 focus:outline-none"
                 >
                   <option value="">Sélectionnez...</option>
@@ -148,6 +234,7 @@ export function Contact() {
                 </Label>
                 <Textarea
                   id="message"
+                  name="message"
                   required
                   rows={5}
                   placeholder="Décrivez votre besoin..."
@@ -159,20 +246,9 @@ export function Contact() {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="bg-white text-slate-900 hover:bg-slate-100 font-medium px-8"
+                  className="bg-white text-slate-900 hover:bg-slate-100 font-medium px-8 cursor-pointer"
                 >
                   {isSubmitting ? "Envoi en cours..." : "Envoyer la demande"}
-                </Button>
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="border-slate-700 text-slate-300 hover:bg-slate-800 bg-transparent"
-                  asChild
-                >
-                  <a href="tel:0698299863">
-                    <Phone className="w-4 h-4 mr-2" />
-                    Appeler
-                  </a>
                 </Button>
               </div>
             </form>

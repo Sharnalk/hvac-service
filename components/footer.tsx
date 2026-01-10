@@ -6,8 +6,7 @@ export function Footer() {
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-
-              <span className="font-semibold text-slate-100 text-lg">HVAC SERVICES</span>
+              <img src="/favicon.ico" alt="HVAC SERVICES Logo" className="h-24 w-24 rounded-lg"/>
             </div>
             <p className="text-slate-400 text-sm max-w-sm leading-relaxed">
               Climatisation pour particuliers et professionnels. Précision, fiabilité, réactivité.
@@ -47,7 +46,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-slate-400">
               <li>931601371 00012</li>
               <li>06 98 29 98 63</li>
-              <li>contact@froidpro.fr</li>
+              <li>hvacservices.clim@gmail.com</li>
               <li className="text-cyan-400">Urgence 24/7</li>
             </ul>
           </div>
